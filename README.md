@@ -26,14 +26,68 @@ implementation 'com.splyt:splytwidgetsdk:0.0.1'
 
 ## How to use the SplytWidgetSDK
 
-The SplytWidgetSDK contains a static class named `SplytWidget`.  To launch the `SplytWidget` you must call the `presentWidget` method.  This method takes 3 parameters.  The first parameter `conte`
+In order to add the widget to your application you should create an activity which is a direct subclass of `SWWidgetActivity`.  `SWWidgetActivity` is a abstract class, which requires to implement a set of abstract methods.  These are used to allow communication between the widget and your code. You should never start this activity directly, as it will not launch.  Please use the `presentWidget` method explained below.
+
+The SplytWidgetSDK contains a static class named `SplytWidget`.  To launch the `SplytWidget` you must call the `presentWidget` method.  This method takes 3 parameters.  The first parameter is a context, used to start an activity.  The second parameter is a class reference to your subclass of `SWWidgetActivity`.  The next parameter is an instance of `SWConfiguration`.  The last parameter is a callback, which will receive an error indicating any validation or configuration issues with your implementation.
 
 ### Example
 
 ```
-
-``
+SplytWidget.presentWidget(this, DemoActivity::class.java, config.build()) {
+    print(it?.toString())
+}
+```
 
 ## Configuring the SplytWidget
 
 When presenting the SplytWidget you are required to pass an instance of `SWConfiguration`. To create the `SWConfiguration` you should use the `SWConfigurationBuilder`.  The `SWConfiguration` model allows you to fine tune the widget for you app.
+
+### Example
+
+```
+val user = SWUser()
+user.id        = "12345"
+user.firstName = "Test"
+user.lastName  = "User"
+user.phone     =  "+441732123456"
+user.email     = "test.user@test.com"
+
+val paymentMethod = SWPaymentMethod("123", SWPaymentMethodType.Visa, "12345")
+
+val builder = SWRideParameters.Builder()
+   .setUser(user)
+   .setPickupLocation(SWLocation(48.864194, 2.343618, "Default"))
+   .setPaymentMethods(arrayOf(paymentMethod))
+
+val config = SWConfiguration.Builder()
+   .setPartnerId("your-partner-id")
+   .setSandbox(true)
+   .setRequestLocationPermission(true)
+   .setRequestNotificationPermission(true)
+   .setDefaultLocation(SWLocation(48.864194, 2.343618, "Default"))
+   .setCurrencyCode("GBP")
+   .setLocale("en-gb")
+   .setBrandColors(SWColors("#d8171d", "#ffffff", "#ddd"))
+   .setRideParameters(builder.build())
+```
+
+## Check if a user has an active booking
+
+You may wish to check if a user has a booking in progress.  This can be useful for building UI in your app.  To check whether the user has a booking you can call the following method.
+
+### Example
+
+```
+val user = SWUser()
+user.id        = "12345"
+user.firstName = "Test"
+user.lastName  = "User"
+user.phone     =  "+441732123456"
+user.email     = "test.user@test.com"
+
+SplytWidget.fetchActiveBooking(user, "example-token") {
+    booking, error ->
+}
+```
+
+You will need to pass an instance of `SWUser` which contains the id of the user in question.  An accessToken is also required.  The completion handler will return an optional booking or error.
