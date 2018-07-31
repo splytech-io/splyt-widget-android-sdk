@@ -1,8 +1,8 @@
 # SplytWidgetSDK
 
-The `SplytWidgetSDK` allows you to easily make ride hailing available to users of your app. Using the `SplytWidgetSDK` you can present your users with a clean, simple and logical interface.
+The `SplytWidgetSDK` allows you to easily make ride hailing available to users of your app. Using the `SplytWidgetSDK` you can present your users with a clean, simple and logical booking interface.
 
-For detailed instructions, [please read our documentation](https://developer.splytech.io/widget/android/index.html) or contact Splyt.
+For detailed instructions [please read our documentation](https://developer.splytech.io/widget/) as well as the [SDK class reference](https://developer.splytech.io/widget/android/index.html). Otherwise, please get in touch with us at [widget@splyech.io](mailto:widget@splytech.io).
 
 ## Installing
 
