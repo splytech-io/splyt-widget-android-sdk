@@ -22,4 +22,8 @@ class DemoActivity: SWWidgetActivity() {
     override fun splytWidgetUserNotRegistered() {
         // Take your use to a registration section.
     }
+
+    override fun splytWidgetAuthorizationFailed() {
+        // Close the widget or inform your user an error has occurred.
+    }
 }

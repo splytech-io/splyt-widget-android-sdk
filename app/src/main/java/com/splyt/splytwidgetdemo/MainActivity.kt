@@ -2,7 +2,7 @@ package com.splyt.splytwidgetdemo
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.splyt.splytwidgetsdk.SWPaymentMethodType
+import com.splyt.splytwidgetsdk.SWCardType
 import com.splyt.splytwidgetsdk.SplytWidget
 import com.splyt.splytwidgetsdk.models.*
 
@@ -19,12 +19,14 @@ class MainActivity : AppCompatActivity() {
         user.phone     =  "+441732123456"
         user.email     = "test.user@test.com"
 
-        val paymentMethod = SWPaymentMethod("123", SWPaymentMethodType.Visa, "12345")
+        val paymentCard = SWPaymentCard("123", SWCardType.Visa, "12345", "04", "21")
 
         val builder = SWRideParameters.Builder()
                 .setUser(user)
                 .setPickupLocation(SWLocation(48.864194, 2.343618, "Default"))
-                .setPaymentMethods(arrayOf(paymentMethod))
+                .setPaymentCards(arrayOf(paymentCard))
+                .setClientBookingId("your internal booking id")
+                .setFlightNumber("example flight number")
 
         val config = SWConfiguration.Builder()
                 .setPartnerId("your-partner-id")
