@@ -2,11 +2,10 @@ package com.splyt.splytwidgetdemo
 
 import com.splyt.splytwidgetsdk.activities.SWWidgetActivity
 import com.splyt.splytwidgetsdk.models.SWBooking
-import com.splyt.splytwidgetsdk.models.SWUser
 
 class DemoActivity: SWWidgetActivity() {
 
-    override fun splytWidgetAddPaymentMethod(user: SWUser) {
+    override fun splytWidgetAddPaymentMethod() {
         // Take your user to an add payment screen.
     }
 
@@ -17,13 +16,5 @@ class DemoActivity: SWWidgetActivity() {
     override fun splytWidgetRequestAccessToken(callback: (token: String) -> Unit) {
         // Return a token
         callback("test-token")
-    }
-
-    override fun splytWidgetUserNotRegistered() {
-        // Take your use to a registration section.
-    }
-
-    override fun splytWidgetAuthorizationFailed() {
-        // Close the widget or inform your user an error has occurred.
     }
 }
