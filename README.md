@@ -21,7 +21,7 @@ allprojects {
 Then add in your apps build.gradle, add a link to our package.
 
 ```
-implementation 'com.splyt:splytwidgetsdk:1.0.4'
+implementation 'com.splyt:splytwidgetsdk:1.1.1'
 ```
 
 ## How to use the SplytWidgetSDK
@@ -45,57 +45,20 @@ When presenting the SplytWidget you are required to pass an instance of `SWConfi
 ### Example
 
 ```
-val user = SWUser()
-user.id        = "12345"
-user.firstName = "Test"
-user.lastName  = "User"
-user.phone     =  "+441732123456"
-user.email     = "test.user@test.com"
-
-val paymentMethod = SWCustomPaymentMethod("123", "12345")
-var paymentCard = SWPaymentCard("123", SWCardType.Visa, "1234", "01", "20")
-
 val builder = SWRideParameters.Builder()
-        .setUser(user)
+        .setUserId('user-id')
         .setPickupLocation(SWLocation(48.864194, 2.343618, "Default"))
-        .setCustomPaymentMethods(arrayOf(paymentMethod))
-        .setPaymentCards(arrayOf(paymentCard))
 
 val config = SWConfiguration.Builder()
         .setPartnerId("test-partner-id")
         .setSandbox(true)
         .setRequestLocationPermission(true)
-        .setRequestNotificationPermission(true)
         .setDefaultLocation(SWLocation(48.864194, 2.343618, "Default"))
-        .setCurrencyCode("GBP")
         .setLocale("en-gb")
-        .setBrandColors(SWColors("#d8171d", "#ffffff", "#ddd"))
+        .setPrimaryColor("hex color")
         .setRideParameters(builder.build())
 
 SplytWidget.presentWidget(this, WidgetExampleActivity::class.java, config.build()) {
     print(it?.toString())
 }
 ```
-
-## Check if a user has an active booking
-
-Pleas note this feature is coming soon.
-
-You may wish to check if a user has a booking in progress.  This can be useful for building UI in your app.  To check whether the user has a booking you can call the following method.
-
-### Example
-
-```
-val user = SWUser()
-user.id        = "12345"
-user.firstName = "Test"
-user.lastName  = "User"
-user.phone     =  "+441732123456"
-user.email     = "test.user@test.com"
-
-SplytWidget.fetchActiveBooking(user, "example-token") {
-    booking, error ->
-}
-```
-
-You will need to pass an instance of `SWUser` which contains the id of the user in question.  An accessToken is also required.  The completion handler will return an optional booking or error.
