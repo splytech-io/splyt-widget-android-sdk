@@ -1,12 +1,11 @@
 package com.splyt.splytwidgetdemo
 
-import android.support.v7.app.AppCompatActivity
+import android.app.Activity
 import android.os.Bundle
-import com.splyt.splytwidgetsdk.SWCardType
 import com.splyt.splytwidgetsdk.SplytWidget
 import com.splyt.splytwidgetsdk.models.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,9 +13,9 @@ class MainActivity : AppCompatActivity() {
 
         val builder = SWRideParameters.Builder()
                 .setUserId("test-user-id")
-                .setPickupLocation(SWLocation(48.864194, 2.343618))
-                .setClientBookingId("your internal booking id")
-                .setFlightNumber("example flight number")
+                .setPickupLocation(SWLocation(48.864194, 2.343618)) // Optional
+                .setClientBookingId("your internal booking id") // Optional
+                .setFlightNumber("example flight number") // Optional
 
         val config = SWConfiguration.Builder()
                 .setPartnerId("your-splyt-partner-id")
